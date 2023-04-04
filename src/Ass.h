@@ -3,10 +3,10 @@
 #include "instruction.h"
 class Ass : public Instruction {
     int getArgCount() {
-        return 1;
+        return 2;
     }
     string getName() {
-        return "";
+        return "ass";
     }
 };
 #endif

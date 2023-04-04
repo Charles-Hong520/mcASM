@@ -45,12 +45,13 @@ class Parser {
         };
     }
     string getInstName() {return currname;}
+    int getArgCount() {return mp[currname]->getArgCount();}
     void parse(const string& line) {
+        args.resize(0);
         stringstream ss(line);
         string word;
-        while(ss>>word) args.push_back(word);
-        
-        currname = args[0]; 
+        ss>>currname;
+        while(ss>>word) args.push_back(word); 
         for(char & c : currname) c |= 32; //32 is bitmask for toLowerCase        
         
     }
@@ -58,8 +59,9 @@ class Parser {
         return mp.count(currname); 
     }
     bool hasValidParamCount() {
-        return mp[currname]->getArgCount() + 1 == args.size();
+        return mp[currname]->getArgCount() == args.size();
     }
+    
 };
 
 #endif

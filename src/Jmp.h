@@ -6,7 +6,7 @@ class Jmp : public Instruction {
         return 1;
     }
     string getName() {
-        return "";
+        return "jmp";
     }
 };
 #endif

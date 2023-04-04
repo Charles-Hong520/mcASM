@@ -6,7 +6,7 @@ class Le : public Instruction {
         return 3;
     }
     string getName() {
-        return "";
+        return "le";
     }
 };
 #endif

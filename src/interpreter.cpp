@@ -29,10 +29,10 @@ int main(int argc, char** argv) {
     std::ofstream fout("a.mcfunction");
     string line, inst_token;
     Parser parser;
-    int lineNumber = 1;
-    while(getline(fin, line)) {
+    int lineNumber = 0;
+    while(getline(fin, line)) {        
+        lineNumber++;
         if(line=="") {
-            lineNumber++;
             getline(fin,line);
             continue;
         }
@@ -43,6 +43,10 @@ int main(int argc, char** argv) {
             return 1;
         }
         //then check for valid params
+        if(!parser.hasValidParamCount()) {
+            cerr<<printAtLine(lineNumber)<<"\""<<parser.getInstName()<<"\" requires "<<parser.getArgCount()<<" arguments"<<endl;
+            return 1;
+        }
     }
 
 }
