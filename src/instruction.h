@@ -2,13 +2,13 @@
 #define __INSTRUCTION__
 
 class Instruction {
-  private:
+  protected:
     string name;
     int argCount;
     
   public:
-    virtual string getName() = 0;
-    virtual int getArgCount() = 0;
-
+    int getArgCount() {return argCount;}
+    string getName() {return name;}
+    //virtual string generateMC(const vector<string>& v) = 0;
 };
 #endif

@@ -46,6 +46,9 @@ int main(int argc, char** argv) {
             cerr<<printAtLine(lineNumber)<<"\""<<parser.getInstName()<<"\" requires "<<parser.getArgCount()<<" arguments"<<endl;
             continue;
         }
+        // parser.generate();
     }
+    //if everything pass, then generate to 1 big string
+
 
 }

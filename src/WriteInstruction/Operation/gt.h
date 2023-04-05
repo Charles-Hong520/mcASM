@@ -3,8 +3,9 @@
 #include "operation.h"
 
 class Gt : public Operation {
-    string getName() {
-        return "gt";
+    public:
+    Gt() {
+        name = "gt";
     }
 };
 #endif

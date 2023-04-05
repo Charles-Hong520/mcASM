@@ -2,8 +2,9 @@
 #define __MOD__
 #include "operation.h"
 class Mod : public Operation {
-    string getName() {
-        return "mod";
+    public:
+    Mod() {
+        name = "mod";
     }
 };
 #endif

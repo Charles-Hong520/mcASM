@@ -2,11 +2,10 @@
 #define __JIF__
 #include "../instruction.h"
 class Jif : public Instruction {
-    int getArgCount() {
-        return 2;
-    }
-    string getName() {
-        return "jif";
+    public:
+    Jif() {
+        name = "jif";
+        argCount = 2;
     }
 };
 #endif

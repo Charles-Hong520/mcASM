@@ -2,11 +2,9 @@
 #define __BITNOT__
 #include "writeinstruction.h"
 class Bitnot : public WriteInstruction {
-    int getArgCount() {
-        return 2;
-    }
-    string getName() {
-        return "bitnot";
+    public:
+    Bitnot() {
+        name = "bitnot";
     }
 };
 #endif

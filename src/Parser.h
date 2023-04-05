@@ -6,6 +6,7 @@ class Parser {
     vector<string> args;
     string currname;
     public:
+    Instruction* mcinst; 
     Parser() {
         mp = {
             {"add", new Add()},
@@ -39,7 +40,8 @@ class Parser {
         ss>>currname;
         while(ss>>word) args.push_back(word); 
         for(char & c : currname) c |= 32; //32 is bitmask for toLowerCase        
-        
+        //point to correct Instruction()
+        //mcinst = mp[currname];
     }
     bool hasValidName() {
         return mp.count(currname); 

@@ -2,8 +2,9 @@
 #define __MUL__
 #include "operation.h"
 class Mul : public Operation {
-    string getName() {
-        return "mul";
+    public:
+    Mul() {
+        name = "mul";
     }
 };
 #endif

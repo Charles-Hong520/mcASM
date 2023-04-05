@@ -2,11 +2,10 @@
 #define __WRITEINSTRUCTION__
 #include "../instruction.h"
 class WriteInstruction : public Instruction {
-    int getArgCount() {
-        return 2;
-    }
-    virtual string getName() {
-        return "writeinstruction";
+    public:
+    WriteInstruction() {
+        name = "writeinstruction";
+        argCount = 2;
     }
 };
 #endif

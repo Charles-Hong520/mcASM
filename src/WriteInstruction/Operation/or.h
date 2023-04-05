@@ -3,8 +3,9 @@
 #include "operation.h"
 
 class Or : public Operation {
-    string getName() {
-        return "or";
+    public:
+    Or() {
+        name = "or";
     }
 };
 #endif

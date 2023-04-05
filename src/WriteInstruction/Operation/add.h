@@ -2,8 +2,9 @@
 #define __ADD__
 #include "operation.h"
 class Add : public Operation {
-    string getName() {
-        return "add";
+    public:
+    Add() {
+        name = "add";
     }
 };
 #endif

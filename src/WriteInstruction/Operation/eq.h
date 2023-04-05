@@ -3,8 +3,9 @@
 #include "operation.h"
 
 class Eq : public Operation {
-    string getName() {
-        return "eq";
+    public:
+    Eq() {
+        name = "eq";
     }
 };
 #endif
