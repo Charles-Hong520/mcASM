@@ -1,11 +1,6 @@
 #ifndef __PARSER__
 #define __PARSER__
-#include "instruction.h"
-#include "ass.h"
-#include "Operation/all_headers.h"
-#include "jmp.h"
-#include "jif.h"
-#include "not.h"
+#include "all_headers.h"
 class Parser {
     map<string, Instruction*> mp;
     vector<string> args;
@@ -17,6 +12,9 @@ class Parser {
             {"sub", new Sub()},
             {"ass", new Ass()},
             {"and", new And()},
+            {"mul", new Mul()},
+            {"div", new Div()},
+            {"mod", new Mod()},
             {"or", new Or()},
             {"not", new Not()},
             {"bitand", new Bitand()},

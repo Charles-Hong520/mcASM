@@ -1,0 +1,23 @@
+#ifndef __WRITE_HEADERS__
+#define __WRITE_HEADERS__
+#include "Operation/add.h"
+#include "Operation/and.h"
+#include "Operation/bitand.h"
+#include "Operation/bitor.h"
+#include "Operation/div.h"
+#include "Operation/eq.h"
+#include "Operation/ge.h"
+#include "Operation/gt.h"
+#include "Operation/le.h"
+#include "Operation/lt.h"
+#include "Operation/mod.h"
+#include "Operation/mul.h"
+#include "Operation/ne.h"
+#include "Operation/operation.h"
+#include "Operation/or.h"
+#include "Operation/sub.h"
+#include "ass.h"
+#include "bitnot.h"
+#include "not.h"
+#include "writeinstruction.h"
+#endif

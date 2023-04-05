@@ -1,7 +1,7 @@
 #ifndef __OPERATION__
 #define __OPERATION__
-#include "../instruction.h"
-class Operation : public Instruction {
+#include "../writeinstruction.h"
+class Operation : public WriteInstruction {
     int getArgCount() {
         return 3;
     }

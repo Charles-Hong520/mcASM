@@ -1,7 +1,7 @@
 #ifndef __ASS__
 #define __ASS__
-#include "instruction.h"
-class Ass : public Instruction {
+#include "writeinstruction.h"
+class Ass : public WriteInstruction {
     int getArgCount() {
         return 2;
     }

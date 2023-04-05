@@ -1,6 +1,6 @@
 #ifndef __JIF__
 #define __JIF__
-#include "instruction.h"
+#include "../instruction.h"
 class Jif : public Instruction {
     int getArgCount() {
         return 2;

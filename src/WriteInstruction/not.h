@@ -1,9 +1,9 @@
 #ifndef __NOT__
 #define __NOT__
-#include "instruction.h"
-class Not : public Instruction {
+#include "writeinstruction.h"
+class Not : public WriteInstruction {
     int getArgCount() {
-        return 1;
+        return 2;
     }
     string getName() {
         return "not";
