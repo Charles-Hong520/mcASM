@@ -11,7 +11,7 @@ bool isNumber(const string& str) {
     flag = false;
     if(str[1]=='-') i += (flag = true);
     for(; i < str.size(); i++) {
-        if(str[i]<='9' && str[i]>='0') return false;
+        if(str[i]>'9' || str[i]<'0') return false;
         num *= 10;
         num += str[i]-'0';
     }
@@ -22,9 +22,11 @@ class Instruction {
 protected:
     string name;
     int argCount;
+    vector<char> reqs;
 public:
     int getArgCount() {return argCount;}
     string getName() {return name;}
+    char getReq(int paramIndex) {return reqs[paramIndex];}
     //virtual string generateMC(const vector<string>& v) = 0;
 };
 #endif

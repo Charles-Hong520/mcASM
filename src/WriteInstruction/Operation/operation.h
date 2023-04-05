@@ -5,7 +5,8 @@ class Operation : public WriteInstruction {
     public:
     Operation() {
         name = "op";
-        argCount = 3;   
+        argCount = 3;
+        reqs = {'v', 'n', 'n'};
     }
 };
 #endif

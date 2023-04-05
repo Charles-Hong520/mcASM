@@ -6,6 +6,7 @@ class Jif : public Instruction {
     Jif() {
         name = "jif";
         argCount = 2;
+        reqs = {'v', 'l'};
     }
 };
 #endif

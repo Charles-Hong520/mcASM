@@ -6,6 +6,7 @@ class Parser {
     #define currName currArgs[0]
     #define currInst mp[currName]
     #define currLab lab[currName]
+
     //stores all info
     vector<vector<string>> lines;
     map<string, vector<int>> lab;
@@ -38,7 +39,7 @@ class Parser {
             {"jif", new Jif()}
         };
     }
-    parse(std::ifstream & fin) {
+    void parse(std::ifstream & fin) {
         string line;
         while(getline(fin, line)) {
             parseLine(line);
@@ -47,12 +48,47 @@ class Parser {
 
         for(lineNumber = 0; i < lines.size(); lineNumber++) {      
             if(isLabel()) {
-                currLab[currName].push_back(lineNumber);
+                insertLabel(lineNumber);
+            } else if(hasLabelSuffix()) {
+                errs.push_back({{lineNumber}, currName, "Label Has Parameters"});
             }
+        }
+
+        for(auto [l,v] : lab) {
+            if(v.size()>1) errs.push_back({v, l, "Duplicate Label"});
         }
         for(lineNumber = 0; i < lines.size(); lineNumber++) {
             if(!hasValidInstructionName()) {
+                errs.push_back({{lineNumber}, currName, "Unknown Instruction"});
+            } else {
+                if(!hasValidParamCount()) {
+                    errs.push_back({lineNumber, currInst->getArgCount(), 
+                    currArgs.size()-1}, currName, "Parameter Count")
+                }
+                //check for correct type in each slot
+                //v is variable only
+                //n is v || number
+                //l is label only
+                char reqType;
+                for(int j = 1; j < currArgs.size(); j++) {
+                    reqType = currInst->getReq(j-1);
+                    if(reqType=='v') {
+                        if(!isVariable(currArgs[j])) {
 
+                        }
+                    } else if(reqType=='n') {
+                        if(!isNumber(currArgs[j]) && !isVariable(currArgs[j])) {
+                        
+                        }
+
+                    } else if(reqType=='l') {
+                        if(lab.count(currArgs[j])==0) {
+                            
+                        } 
+                    } else {
+                        cout<<"something wrong in arg check charles"<<endl;
+                    }
+                }
             }
         }
     }
@@ -77,7 +113,7 @@ class Parser {
         return mp.count(currName); 
     }
     bool isLabel() {
-        return currArgs.size()==1 && isVariable(instName) && !hasValidInstructionName();
+        return currArgs.size()==1 && hasLabelSuffix(currName);
     }
     bool hasValidParamCount() {
         return currInst->getArgCount()+1 == currArgs.size();
@@ -85,7 +121,9 @@ class Parser {
     void insertLabel(int linenum) {
         currLab.push_back(linenum);
     }
-
+    bool hasLabelSuffix(const string& str) {
+        return str.back()==':';
+    }
 };
 
 #endif

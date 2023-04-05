@@ -20,20 +20,16 @@ string printAtLine(int n) {
 }
 
 int main(int argc, char** argv) {
-    if(argc != 2 && argc != 4) {
+    if(argc != 2 && argc != 3) {
         cerr<<"invalid argument count"<<endl;
         return 1;
     }
     std::ifstream fin(argv[1]);
-    std::ofstream fout("a.mcfunction");
+    string filename;
+    if(argc==2) filename = "a.mcfunction";
+    else filename = argv[2];
+    std::ofstream fout(filename);
+
     Parser parser;
-
-
-
-
-
-
-
-
-
+    parser.parse(fin);
 }

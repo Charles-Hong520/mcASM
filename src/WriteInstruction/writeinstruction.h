@@ -6,6 +6,7 @@ class WriteInstruction : public Instruction {
     WriteInstruction() {
         name = "writeinstruction";
         argCount = 2;
+        reqs = {'v','n'};
     }
 };
 #endif
