@@ -1,23 +1,11 @@
-#ifndef _PARSER
-#define _PARSER_
+#ifndef __PARSER__
+#define __PARSER__
 #include "instruction.h"
-#include "Add.h"
-#include "Sub.h"
-#include "Ass.h"
-#include "And.h"
-#include "Or.h"
-#include "Not.h"
-#include "Bitand.h"
-#include "Bitor.h"
-#include "Bitnot.h"
-#include "Lt.h"
-#include "Eq.h"
-#include "Gt.h"
-#include "Le.h"
-#include "Ge.h"
-#include "Ne.h"
-#include "Jmp.h"
-#include "Jif.h"
+#include "ass.h"
+#include "Operation/all_headers.h"
+#include "jmp.h"
+#include "jif.h"
+#include "not.h"
 class Parser {
     map<string, Instruction*> mp;
     vector<string> args;

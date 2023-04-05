@@ -5,7 +5,6 @@
 #include <map>
 #include <vector>
 
-
 using std::string;
 using std::cerr;
 using std::cout;
@@ -40,12 +39,12 @@ int main(int argc, char** argv) {
         //check what instruction it is.
         if(!parser.hasValidName()) {
             cerr<<printAtLine(lineNumber)<<"\""<<parser.getInstName()<<"\" is an invalid instruction"<<endl;
-            return 1;
+            continue;
         }
         //then check for valid params
         if(!parser.hasValidParamCount()) {
             cerr<<printAtLine(lineNumber)<<"\""<<parser.getInstName()<<"\" requires "<<parser.getArgCount()<<" arguments"<<endl;
-            return 1;
+            continue;
         }
     }
 
