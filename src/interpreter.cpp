@@ -26,29 +26,14 @@ int main(int argc, char** argv) {
     }
     std::ifstream fin(argv[1]);
     std::ofstream fout("a.mcfunction");
-    string line, inst_token;
     Parser parser;
-    int lineNumber = 0;
-    while(getline(fin, line)) {        
-        lineNumber++;
-        if(line=="") {
-            getline(fin,line);
-            continue;
-        }
-        parser.parse(line);
-        //check what instruction it is.
-        if(!parser.hasValidName()) {
-            cerr<<printAtLine(lineNumber)<<"\""<<parser.getInstName()<<"\" is an invalid instruction"<<endl;
-            continue;
-        }
-        //then check for valid params
-        if(!parser.hasValidParamCount()) {
-            cerr<<printAtLine(lineNumber)<<"\""<<parser.getInstName()<<"\" requires "<<parser.getArgCount()<<" arguments"<<endl;
-            continue;
-        }
-        // parser.generate();
-    }
-    //if everything pass, then generate to 1 big string
+
+
+
+
+
+
+
 
 
 }

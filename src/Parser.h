@@ -2,11 +2,18 @@
 #define __PARSER__
 #include "all_headers.h"
 class Parser {
+    #define currArgs lines[lineNumber] 
+    #define currName currArgs[0]
+    #define currInst mp[currName]
+    #define currLab lab[currName]
+    //stores all info
+    vector<vector<string>> lines;
+    map<string, vector<int>> lab;
     map<string, Instruction*> mp;
-    vector<string> args;
-    string currname;
+    vector<Error> errs;
+    int lineNumber = 0;
+    //variables for 1 instance of instruction
     public:
-    Instruction* mcinst; 
     Parser() {
         mp = {
             {"add", new Add()},
@@ -31,25 +38,54 @@ class Parser {
             {"jif", new Jif()}
         };
     }
-    string getInstName() {return currname;}
-    int getArgCount() {return mp[currname]->getArgCount();}
-    void parse(const string& line) {
-        args.resize(0);
+    parse(std::ifstream & fin) {
+        string line;
+        while(getline(fin, line)) {
+            parseLine(line);
+        }
+
+
+        for(lineNumber = 0; i < lines.size(); lineNumber++) {      
+            if(isLabel()) {
+                currLab[currName].push_back(lineNumber);
+            }
+        }
+        for(lineNumber = 0; i < lines.size(); lineNumber++) {
+            if(!hasValidInstructionName()) {
+
+            }
+        }
+    }
+    private:
+
+    //breaks the line to pieces and assigns them to "variables for 1 instance"
+    void parseLine(const string& line) {
+        if(line=="") {
+            lines.push_back({});
+            return;
+        }
+
+        vector<string> args;
         stringstream ss(line);
         string word;
-        ss>>currname;
         while(ss>>word) args.push_back(word); 
-        for(char & c : currname) c |= 32; //32 is bitmask for toLowerCase        
-        //point to correct Instruction()
-        //mcinst = mp[currname];
+        for(char & c : args[0]) c |= 32; //32 is bitmask for toLowerCase
+
+        lines.push_back(args);
     }
-    bool hasValidName() {
-        return mp.count(currname); 
+    bool hasValidInstructionName() {
+        return mp.count(currName); 
+    }
+    bool isLabel() {
+        return currArgs.size()==1 && isVariable(instName) && !hasValidInstructionName();
     }
     bool hasValidParamCount() {
-        return mp[currname]->getArgCount() == args.size();
+        return currInst->getArgCount()+1 == currArgs.size();
     }
-    
+    void insertLabel(int linenum) {
+        currLab.push_back(linenum);
+    }
+
 };
 
 #endif
