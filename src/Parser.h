@@ -46,10 +46,10 @@ class Parser {
         }
 
 
-        for(lineNumber = 0; i < lines.size(); lineNumber++) {      
+        for(lineNumber = 0; lineNumber < lines.size(); lineNumber++) {      
             if(isLabel()) {
                 insertLabel(lineNumber);
-            } else if(hasLabelSuffix()) {
+            } else if(hasLabelSuffix(currName)) {
                 errs.push_back({{lineNumber}, currName, "Label Has Parameters"});
             }
         }
@@ -57,13 +57,12 @@ class Parser {
         for(auto [l,v] : lab) {
             if(v.size()>1) errs.push_back({v, l, "Duplicate Label"});
         }
-        for(lineNumber = 0; i < lines.size(); lineNumber++) {
+        for(lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
             if(!hasValidInstructionName()) {
                 errs.push_back({{lineNumber}, currName, "Unknown Instruction"});
             } else {
                 if(!hasValidParamCount()) {
-                    errs.push_back({lineNumber, currInst->getArgCount(), 
-                    currArgs.size()-1}, currName, "Parameter Count")
+                    errs.push_back({{lineNumber,currInst->getArgCount(),(int)currArgs.size()-1},currName,"Parameter Count"});
                 }
                 //check for correct type in each slot
                 //v is variable only
@@ -74,16 +73,16 @@ class Parser {
                     reqType = currInst->getReq(j-1);
                     if(reqType=='v') {
                         if(!isVariable(currArgs[j])) {
-
+                            errs.push_back({{lineNumber}, currArgs[j], "variable only"});
                         }
                     } else if(reqType=='n') {
                         if(!isNumber(currArgs[j]) && !isVariable(currArgs[j])) {
-                        
+                            errs.push_back({{lineNumber}, currArgs[j], "var or num only"});                        
                         }
 
                     } else if(reqType=='l') {
                         if(lab.count(currArgs[j])==0) {
-                            
+                            errs.push_back({{lineNumber}, currArgs[j], "labels only"});
                         } 
                     } else {
                         cout<<"something wrong in arg check charles"<<endl;
@@ -119,7 +118,9 @@ class Parser {
         return currInst->getArgCount()+1 == currArgs.size();
     }
     void insertLabel(int linenum) {
-        currLab.push_back(linenum);
+        string tmpName = currName;
+        tmpName.pop_back();
+        lab[tmpName].push_back(linenum);
     }
     bool hasLabelSuffix(const string& str) {
         return str.back()==':';

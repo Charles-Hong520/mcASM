@@ -6,7 +6,7 @@ class Jmp : public Instruction {
     Jmp() { 
         name = "jmp";
         argCount = 1;
-        reqs = {'l'}
+        reqs = {'l'};
     }
 };
 #endif

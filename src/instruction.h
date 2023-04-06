@@ -8,7 +8,7 @@ bool isNumber(const string& str) {
     if(str[0]!='#') return false;
     long long num = 0;
     int i = 1;
-    flag = false;
+    bool flag = false;
     if(str[1]=='-') i += (flag = true);
     for(; i < str.size(); i++) {
         if(str[i]>'9' || str[i]<'0') return false;

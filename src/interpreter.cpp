@@ -13,7 +13,7 @@ using std::stringstream;
 using std::map;
 using std::vector;
 
-#include "parser.h"
+#include "Parser.h"
 
 string printAtLine(int n) {
     return "Error: Line "+std::to_string(n)+": ";

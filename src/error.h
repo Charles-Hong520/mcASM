@@ -15,7 +15,8 @@ class Error {
     // labels:
     //     duplicate labels
     //     labels have other params after it
-
+    public:
+    Error() {}
     Error(const vector<int> & v, const string& w, const string& e) {
         lineNumbers=v;
         word=w;
