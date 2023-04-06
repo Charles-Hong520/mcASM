@@ -12,8 +12,9 @@ class Parser {
     map<string, vector<int>> lab;
     map<string, Instruction*> mp;
     vector<Error> errs;
+    set<string> RAWvars;
     int lineNumber = 0;
-    //variables for 1 instance of instruction
+
     public:
     Parser() {
         mp = {
@@ -47,6 +48,7 @@ class Parser {
 
 
         for(lineNumber = 0; lineNumber < lines.size(); lineNumber++) {      
+            if(currArgs.empty()) continue;
             if(isLabel()) {
                 insertLabel(lineNumber);
             } else if(hasLabelSuffix(currName)) {
@@ -58,11 +60,26 @@ class Parser {
             if(v.size()>1) errs.push_back({v, l, "Duplicate Label"});
         }
         for(lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
+            if(currArgs.empty()) continue;
+            if(hasLabelSuffix(currName)) continue;
             if(!hasValidInstructionName()) {
                 errs.push_back({{lineNumber}, currName, "Unknown Instruction"});
             } else {
                 if(!hasValidParamCount()) {
                     errs.push_back({{lineNumber,currInst->getArgCount(),(int)currArgs.size()-1},currName,"Parameter Count"});
+                }
+                if(currArgs.size()>=2) {
+                    if(isVariable(currArgs[1])) {
+                        RAWvars.insert(currArgs[1]);
+                    }
+                }
+                for(int j = 2; j < currArgs.size(); j++) {
+                    if(isVariable(currArgs[j])) {
+                        if(RAWvars.count(currArgs[j])==0) {
+                            //read before written to
+                            errs.push_back({{lineNumber}, currArgs[j], "uninitialized variable"});
+                        }
+                    }
                 }
                 //check for correct type in each slot
                 //v is variable only
@@ -70,24 +87,34 @@ class Parser {
                 //l is label only
                 char reqType;
                 for(int j = 1; j < currArgs.size(); j++) {
+
                     reqType = currInst->getReq(j-1);
+
                     if(reqType=='v') {
                         if(!isVariable(currArgs[j])) {
-                            errs.push_back({{lineNumber}, currArgs[j], "variable only"});
+                            errs.push_back({{lineNumber,j}, currArgs[j], "variable only"});
                         }
                     } else if(reqType=='n') {
                         if(!isNumber(currArgs[j]) && !isVariable(currArgs[j])) {
-                            errs.push_back({{lineNumber}, currArgs[j], "var or num only"});                        
+                            errs.push_back({{lineNumber,j}, currArgs[j], "var or num only"});                        
                         }
 
                     } else if(reqType=='l') {
                         if(lab.count(currArgs[j])==0) {
-                            errs.push_back({{lineNumber}, currArgs[j], "labels only"});
+                            errs.push_back({{lineNumber,j}, currArgs[j], "labels only"});
                         } 
                     } else {
-                        cout<<"something wrong in arg check charles"<<endl;
+                        // cout<<"something wrong in arg check charles"<<endl;
+                        // cout<<lineNumber<<" "<<j<<" "<<reqType<<endl;
                     }
                 }
+            }
+        }
+        if(errs.empty()) {
+            cout<<"SUCCESS"<<endl;
+        } else {
+            for(auto er : errs) {
+                cout<<er.message()<<endl;
             }
         }
     }

@@ -4,12 +4,15 @@
 bool isVariable(const string& str) {
     return (str[0]<='Z' && str[0]>='A') || (str[0]<='z' && str[0]>='a');
 }
-bool isNumber(const string& str) {
+bool isNumber(string str) {
     if(str[0]!='#') return false;
+    reverse(str.begin(),str.end());
+    str.pop_back();
+    reverse(str.begin(),str.end());
     long long num = 0;
-    int i = 1;
+    int i = 0;
     bool flag = false;
-    if(str[1]=='-') i += (flag = true);
+    if(str[0]=='-') i += (flag = true);
     for(; i < str.size(); i++) {
         if(str[i]>'9' || str[i]<'0') return false;
         num *= 10;

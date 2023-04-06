@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <set>
+#include <algorithm>
 
 using std::string;
 using std::cerr;
@@ -12,12 +14,12 @@ using std::endl;
 using std::stringstream;
 using std::map;
 using std::vector;
+using std::set;
+using std::to_string;
 
 #include "Parser.h"
 
-string printAtLine(int n) {
-    return "Error: Line "+std::to_string(n)+": ";
-}
+
 
 int main(int argc, char** argv) {
     if(argc != 2 && argc != 3) {

@@ -1,7 +1,8 @@
-ass a 1
-bruh 123
-ass b 2
-jmp 4 23
-add a a 
+ass a #1
+sub c a #4
+ass b #2
+a:
+jmp a
+add a a c
 sub a b a
-sub 7 5 4 8
+sub b #5 #4
