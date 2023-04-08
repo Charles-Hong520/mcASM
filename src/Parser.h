@@ -1,7 +1,6 @@
 #ifndef __PARSER__
 #define __PARSER__
 #include "all_headers.h"
-#include <iostream>
 #include <sys/stat.h>
 #include <sys/types.h>
 class Parser {
@@ -71,17 +70,18 @@ class Parser {
                 if(!hasValidParamCount()) {
                     errs.push_back({{lineNumber,currInst->getArgCount(),(int)currArgs.size()-1},currName,"Parameter Count"});
                 }
-                if(currArgs.size()>=2) {
-                    if(isVariable(currArgs[1])) {
-                        RAWvars.insert(currArgs[1]);
-                    }
-                }
+
                 for(int j = 2; j < (int) currArgs.size(); j++) {
                     if(isVariable(currArgs[j])) {
                         if(RAWvars.count(currArgs[j])==0) {
                             //read before written to
                             errs.push_back({{lineNumber}, currArgs[j], "uninitialized variable"});
                         }
+                    }
+                }
+                if(currArgs.size()>=2) {
+                    if(isVariable(currArgs[1])) {
+                        RAWvars.insert(currArgs[1]);
                     }
                 }
                 //check for correct type in each slot
@@ -113,7 +113,71 @@ class Parser {
                 }
             }
         }
-        return errs.empty();
+        if(!errs.empty()) return false;
+        //clean the input file to get rid of whitespace and assign numbers to labels
+        
+        int actualSize = 0;
+        vector<vector<string>> tmp;
+        for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {
+            if(currArgs.empty()) continue;
+            tmp.push_back(currArgs);
+        }
+
+
+        lines = tmp;
+        tmp.resize(0);
+
+        for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {
+
+            if(isLabel()) {
+                if(lineNumber-1 >= 0) {
+                    lineNumber--;
+                    //if previous line is label
+                    if(isLabel()) {
+                        string tmpName = lines[lineNumber+1][0];
+                        tmpName.pop_back();
+                        string prevName = currName;
+                        prevName.pop_back();
+                        lab[tmpName][0]=lab[prevName][0];
+                    } else { //curr line is the first label
+                        lineNumber++;
+                        string tmpName = currName;
+                        tmpName.pop_back();
+                        lab[tmpName][0]=actualSize;
+                        lineNumber--;
+                    }
+                    lineNumber++;
+                } else {
+                    string tmpName = currName;
+                    tmpName.pop_back();
+                    lab[tmpName][0]=actualSize;
+                }
+            } else {
+                tmp.push_back(currArgs);
+                actualSize++;
+            }
+        }
+        lines = tmp;
+        tmp.clear();
+
+
+
+        for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {
+            for(int i = 1; i < (int) currArgs.size(); i++) {
+                if(currInst->getReq(i-1)=='l') {
+                    currArgs[i] = to_string(lab[currArgs[i]][0]+1);
+                }
+            }
+        }
+        std::ofstream fout("Output/IR.mc");
+        for(vector<string> & vs : lines) {
+            for(string & s : vs) {
+                fout<<s<<" ";
+            }
+            fout<<endl;
+        }
+        fout.close();
+        return true;
     }
     void printErrors() {
         for(auto er : errs) {

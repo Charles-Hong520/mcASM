@@ -8,7 +8,7 @@ CPPFLAGS = -std=c++17 -Wall -Werror
 
 all: mcasm
 
-mcasm: src/interpreter.cpp
+mcasm: src/Parser.h src/interpreter.cpp
 	$(CC) $(CPPFLAGS) src/interpreter.cpp -o mcasm
 
 clean:
