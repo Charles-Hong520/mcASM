@@ -40,7 +40,7 @@ class Parser {
             {"jif", new Jif()}
         };
     }
-    void parse(std::ifstream & fin) {
+    bool parse(std::ifstream & fin) {
         string line;
         while(getline(fin, line)) {
             parseLine(line);
@@ -110,16 +110,18 @@ class Parser {
                 }
             }
         }
-        if(errs.empty()) {
-            cout<<"SUCCESS"<<endl;
-        } else {
-            for(auto er : errs) {
-                cout<<er.message()<<endl;
-            }
+        return errs.empty();
+    }
+    void printErrors() {
+        for(auto er : errs) {
+            cout<<er.message()<<endl;
         }
     }
-    private:
+    void generateMcfunctionFiles(std::ofstream& fout) {
 
+    }
+    private:
+    
     //breaks the line to pieces and assigns them to "variables for 1 instance"
     void parseLine(const string& line) {
         if(line=="") {

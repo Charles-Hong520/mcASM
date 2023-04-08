@@ -6,7 +6,9 @@
 #include <vector>
 #include <set>
 #include <algorithm>
+#include <filesystem>
 
+namespace fs = std::filesystem;
 using std::string;
 using std::cerr;
 using std::cout;
@@ -28,10 +30,15 @@ int main(int argc, char** argv) {
     }
     std::ifstream fin(argv[1]);
     string filename;
-    if(argc==2) filename = "a.mcfunction";
+    if(argc==2) filename = "yourmom/a.mcfunction";
     else filename = argv[2];
     std::ofstream fout(filename);
 
     Parser parser;
-    parser.parse(fin);
+    if(!parser.parse(fin)) {
+        parser.printErrors();
+        return 1;
+    }
+    parser.generateMcfunctionFiles(fout);
+    
 }
