@@ -1,0 +1,1 @@
+tellraw @a ["",{"text":"*********************\n__arg1 = "},{"score":{"name":"__arg1","objective":"Internal"}},{"text":"\n__arg2 = "},{"score":{"name":"__arg2","objective":"Internal"}},{"text":"\n__ret \u0020= "},{"score":{"name":"__ret","objective":"Internal"}}]
