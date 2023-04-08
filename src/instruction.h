@@ -13,7 +13,8 @@ bool isNumber(string str) {
     int i = 0;
     bool flag = false;
     if(str[0]=='-') i += (flag = true);
-    for(; i < str.size(); i++) {
+    int sz = str.size();
+    for(; i < sz; i++) {
         if(str[i]>'9' || str[i]<'0') return false;
         num *= 10;
         num += str[i]-'0';

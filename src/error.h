@@ -35,7 +35,7 @@ class Error {
         } else if(errorName=="Duplicate Label") {
             msg.pop_back();
             msg.pop_back();
-            for(int i = 1; i < nums.size(); i++) {
+            for(unsigned i = 1; i < nums.size(); i++) {
                 msg+=", "+to_string(nums[i]);
             }
             msg+=": "+word+" is a "+errorName;

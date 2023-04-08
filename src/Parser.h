@@ -1,6 +1,9 @@
 #ifndef __PARSER__
 #define __PARSER__
 #include "all_headers.h"
+#include <iostream>
+#include <sys/stat.h>
+#include <sys/types.h>
 class Parser {
     #define currArgs lines[lineNumber] 
     #define currName currArgs[0]
@@ -47,7 +50,7 @@ class Parser {
         }
 
 
-        for(lineNumber = 0; lineNumber < lines.size(); lineNumber++) {      
+        for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {      
             if(currArgs.empty()) continue;
             if(isLabel()) {
                 insertLabel(lineNumber);
@@ -59,7 +62,7 @@ class Parser {
         for(auto [l,v] : lab) {
             if(v.size()>1) errs.push_back({v, l, "Duplicate Label"});
         }
-        for(lineNumber = 0; lineNumber < lines.size(); lineNumber++) {
+        for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {
             if(currArgs.empty()) continue;
             if(hasLabelSuffix(currName)) continue;
             if(!hasValidInstructionName()) {
@@ -73,7 +76,7 @@ class Parser {
                         RAWvars.insert(currArgs[1]);
                     }
                 }
-                for(int j = 2; j < currArgs.size(); j++) {
+                for(int j = 2; j < (int) currArgs.size(); j++) {
                     if(isVariable(currArgs[j])) {
                         if(RAWvars.count(currArgs[j])==0) {
                             //read before written to
@@ -86,7 +89,7 @@ class Parser {
                 //n is v || number
                 //l is label only
                 char reqType;
-                for(int j = 1; j < currArgs.size(); j++) {
+                for(int j = 1; j < (int) currArgs.size(); j++) {
 
                     reqType = currInst->getReq(j-1);
 
@@ -117,7 +120,8 @@ class Parser {
             cout<<er.message()<<endl;
         }
     }
-    void generateMcfunctionFiles(std::ofstream& fout) {
+    void generateMcfunctionFiles() {
+        mkdir("../Output", 0777);
 
     }
     private:
@@ -144,7 +148,7 @@ class Parser {
         return currArgs.size()==1 && hasLabelSuffix(currName);
     }
     bool hasValidParamCount() {
-        return currInst->getArgCount()+1 == currArgs.size();
+        return currInst->getArgCount()+1 == (int) currArgs.size();
     }
     void insertLabel(int linenum) {
         string tmpName = currName;

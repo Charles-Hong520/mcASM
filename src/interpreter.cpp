@@ -24,21 +24,15 @@ using std::to_string;
 
 
 int main(int argc, char** argv) {
-    if(argc != 2 && argc != 3) {
+    if(argc != 2) {
         cerr<<"invalid argument count"<<endl;
         return 1;
     }
     std::ifstream fin(argv[1]);
-    string filename;
-    if(argc==2) filename = "yourmom/a.mcfunction";
-    else filename = argv[2];
-    std::ofstream fout(filename);
-
     Parser parser;
     if(!parser.parse(fin)) {
         parser.printErrors();
         return 1;
     }
-    parser.generateMcfunctionFiles(fout);
-    
+    parser.generateMcfunctionFiles();
 }
