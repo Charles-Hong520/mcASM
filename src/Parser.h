@@ -45,6 +45,7 @@ class Parser {
     bool parse(std::ifstream & fin) {
         string line;
         while(getline(fin, line)) {
+                        cout<<lineNumber<<" 1"<<endl;
             parseLine(line);
         }
 
@@ -72,7 +73,7 @@ class Parser {
                 }
 
                 for(int j = 2; j < (int) currArgs.size(); j++) {
-                    if(isVariable(currArgs[j])) {
+                    if(isVariable(currArgs[j]) && currInst->getReq(j-1)!='l') {
                         if(RAWvars.count(currArgs[j])==0) {
                             //read before written to
                             errs.push_back({{lineNumber}, currArgs[j], "uninitialized variable"});
@@ -121,6 +122,7 @@ class Parser {
         for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {
             if(currArgs.empty()) continue;
             tmp.push_back(currArgs);
+
         }
 
 
@@ -128,7 +130,7 @@ class Parser {
         tmp.resize(0);
 
         for(lineNumber = 0; lineNumber < (int) lines.size(); lineNumber++) {
-
+            
             if(isLabel()) {
                 if(lineNumber-1 >= 0) {
                     lineNumber--;
@@ -192,17 +194,11 @@ class Parser {
     
     //breaks the line to pieces and assigns them to "variables for 1 instance"
     void parseLine(const string& line) {
-        if(line=="") {
-            lines.push_back({});
-            return;
-        }
-
         vector<string> args;
         stringstream ss(line);
         string word;
-        while(ss>>word) args.push_back(word); 
-        for(char & c : args[0]) c |= 32; //32 is bitmask for toLowerCase
-
+        while(ss>>word) args.push_back(word);
+        if(!args.empty()) for(char & c : args[0]) c |= 32; //32 is bitmask for toLowerCase
         lines.push_back(args);
     }
     bool hasValidInstructionName() {
