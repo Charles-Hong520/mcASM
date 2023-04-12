@@ -1,9 +1,11 @@
 # mcASM
 
-Compile with
+In the parent directory, compile with
 
-    g++ -std=c++17 interpreter.cpp -o mcasm
+    make
 
-To generate `a.mcfunction` file, run
-
+To generate the output files, run
+    
     ./mcasm input.mc
+
+The `.mcfunction` files will be in the `Output` Folder
