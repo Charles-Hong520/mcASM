@@ -7,9 +7,9 @@ class Ge : public Operation {
     Ge() {
         name = "ge";
     }
-    string generate(const vector<string>& args) {
-        return "";
+    // string generate(const vector<string>& args) {
+    //     return "";
         
-    }
+    // }
 };
 #endif

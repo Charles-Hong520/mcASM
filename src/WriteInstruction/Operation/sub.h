@@ -7,9 +7,9 @@ class Sub : public Operation {
     Sub() {
         name = "sub";
     }
-    string generate(const vector<string>& args) {
-        return "";
+    // string generate(const vector<string>& args) {
+    //     return "";
         
-    }
+    // }
 };
 #endif

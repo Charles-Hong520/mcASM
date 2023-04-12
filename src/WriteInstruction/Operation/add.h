@@ -6,9 +6,8 @@ class Add : public Operation {
     Add() {
         name = "add";
     }
-    string generate(const vector<string>& args) {
-        return "";
-        
-    }
+    // string generate(const vector<string>& args) {
+    //     return "";
+    // }
 };
 #endif

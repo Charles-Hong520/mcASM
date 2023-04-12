@@ -9,7 +9,15 @@ class WriteInstruction : public Instruction {
         reqs = {'v','n'};
     }
     string generate(const vector<string>& args) {
-        return "";
+        string ans = "";
+        
+        if(isNumber(args[2])) ans += mcAssignImm(ARG1,args[2].substr(1,args[2].size()-1));
+        else ans += mcAssignVar(ARG1,args[2]);
+
+        
+        ans += "run "+this->name+".mc\n";
+        ans += mcAssignVar(args[1], RET);
+        return ans;
     }
 };
 #endif

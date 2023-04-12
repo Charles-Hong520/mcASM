@@ -6,9 +6,9 @@ class Bitor : public Operation {
     Bitor() {
         name = "bitor";
     }
-    string generate(const vector<string>& args) {
-        return "";
+    // string generate(const vector<string>& args) {
+    //     return "";
         
-    }
+    // }
 };
 #endif

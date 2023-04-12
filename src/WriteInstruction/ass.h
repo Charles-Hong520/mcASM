@@ -6,8 +6,8 @@ class Ass : public WriteInstruction {
     Ass() {
         name = "ass";
     }
-    string generate(const vector<string>& args) {
-        return "";
-    }
+    // string generate(const vector<string>& args) {
+    //     return "";
+    // }
 };
 #endif

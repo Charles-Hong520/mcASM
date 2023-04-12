@@ -6,9 +6,9 @@ class Not : public WriteInstruction {
     Not() {
         name = "not";
     }
-    string generate(const vector<string>& args) {
-        return "";
+    // string generate(const vector<string>& args) {
+    //     return "";
         
-    }
+    // }
 };
 #endif

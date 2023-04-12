@@ -7,9 +7,9 @@ class Gt : public Operation {
     Gt() {
         name = "gt";
     }
-    string generate(const vector<string>& args) {
-        return "";
+    // string generate(const vector<string>& args) {
+    //     return "";
         
-    }
+    // }
 };
 #endif

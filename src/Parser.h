@@ -45,7 +45,6 @@ class Parser {
     bool parse(std::ifstream & fin) {
         string line;
         while(getline(fin, line)) {
-                        cout<<lineNumber<<" 1"<<endl;
             parseLine(line);
         }
 
@@ -188,7 +187,9 @@ class Parser {
     }
     void generateMcfunctionFiles() {
         mkdir("../Output", 0777);
-
+        for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
+            cout<<lineNumber+1<<"\n"<<currInst->generate(currArgs);
+        }
     }
     private:
     

@@ -6,9 +6,9 @@ class And : public Operation {
     And() {
         name = "and";
     }
-    string generate(const vector<string>& args) {
-        return "";
+    // string generate(const vector<string>& args) {
+    //     return "";
         
-    }
+    // }
 };
 #endif
