@@ -6,5 +6,9 @@ class Div : public Operation {
     Div() {
         name = "div";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

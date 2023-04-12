@@ -7,5 +7,9 @@ class Or : public Operation {
     Or() {
         name = "or";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

@@ -8,5 +8,9 @@ class Jif : public Instruction {
         argCount = 2;
         reqs = {'v', 'l'};
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

@@ -7,5 +7,9 @@ class Eq : public Operation {
     Eq() {
         name = "eq";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

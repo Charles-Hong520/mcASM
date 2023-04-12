@@ -7,5 +7,9 @@ class Ne : public Operation {
     Ne() {
         name = "ne";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

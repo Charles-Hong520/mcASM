@@ -8,5 +8,9 @@ class Jmp : public Instruction {
         argCount = 1;
         reqs = {'l'};
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

@@ -7,5 +7,9 @@ class Le : public Operation {
     Le() {
         name = "le";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

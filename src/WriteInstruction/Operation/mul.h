@@ -6,5 +6,9 @@ class Mul : public Operation {
     Mul() {
         name = "mul";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

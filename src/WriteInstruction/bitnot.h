@@ -6,5 +6,9 @@ class Bitnot : public WriteInstruction {
     Bitnot() {
         name = "bitnot";
     }
+    string generate(const vector<string>& args) {
+        return "";
+
+    }
 };
 #endif

@@ -6,5 +6,9 @@ class Mod : public Operation {
     Mod() {
         name = "mod";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif

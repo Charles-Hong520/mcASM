@@ -8,5 +8,8 @@ class Operation : public WriteInstruction {
         argCount = 3;
         reqs = {'v', 'n', 'n'};
     }
+    string generate(const vector<string>& args) {
+        return "";
+    }
 };
 #endif

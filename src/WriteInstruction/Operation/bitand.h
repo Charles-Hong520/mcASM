@@ -6,5 +6,9 @@ class Bitand : public Operation {
     Bitand() {
         name = "bitand";
     }
+    string generate(const vector<string>& args) {
+        return "";
+        
+    }
 };
 #endif
