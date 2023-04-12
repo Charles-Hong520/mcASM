@@ -186,10 +186,26 @@ class Parser {
         }
     }
     void generateMcfunctionFiles() {
-        mkdir("../Output", 0777);
+        mkdir("Output", 0777);
+
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
-            cout<<lineNumber+1<<"\n"<<currInst->generate(currArgs);
+            ofstream fout("Output/"+to_string(lineNumber+1)+".mcfunction");
+            fout<<currInst->generate(currArgs);
+            fout.close();
         }
+        ofstream fout("Output/main.mcfunction");
+        for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
+            fout<<"execute if score programCounter Variable matches "<<lineNumber+1;
+            fout<<" run function assembly:"<<lineNumber+1<<endl;
+        }
+        fout<<"scoreboard players add programCounter Variable 1"<<endl;
+        fout<<"execute if score programCounter Variable matches ..2 run function assembly:main";
+        fout.close();
+        // execute if score programCounter Variable matches 0 run function assembly:a
+        // execute if score programCounter Variable matches 1 run function assembly:b
+        // ...
+        // scoreboard players add programCounter Variable 1
+        // execute if score programCounter Variable matches ..2 run function assembly:main 
     }
     private:
     

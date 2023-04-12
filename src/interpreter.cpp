@@ -18,6 +18,8 @@ using std::map;
 using std::vector;
 using std::set;
 using std::to_string;
+using std::ofstream;
+using std::ifstream;
 
 #include "Parser.h"
 
