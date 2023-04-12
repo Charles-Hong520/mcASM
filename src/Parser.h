@@ -186,6 +186,7 @@ class Parser {
         }
     }
     void generateMcfunctionFiles() {
+        std::filesystem::remove_all("Output");
         mkdir("Output", 0777);
 
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
