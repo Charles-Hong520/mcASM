@@ -14,4 +14,4 @@ execute if score __pc Internal matches 13 run function mcasm/inputmc:13
 execute if score __pc Internal matches 14 run function mcasm/inputmc:14
 execute if score __pc Internal matches 15 run function mcasm/inputmc:15
 scoreboard players add __pc Internal 1
-execute if score __pc Internal matches ..15 run function assembly:main
+execute if score __pc Internal matches ..15 run function mcasm/inputmc:main
