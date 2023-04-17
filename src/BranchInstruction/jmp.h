@@ -8,7 +8,9 @@ class Jmp : public Instruction {
         argCount = 1;
         reqs = {'l'};
     }
-    string generate(const vector<string>& args) {
+    string generate(const vector<string>& args, int currln) {
+        int jmpTo = std::stoi(args[1]);
+        if (currln >= jmpTo) jmpTo--;
         return "";
         
     }

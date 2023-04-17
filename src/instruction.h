@@ -47,7 +47,7 @@ public:
     int getArgCount() {return argCount;}
     string getName() {return name;}
     char getReq(int paramIndex) {return reqs[paramIndex];}
-    virtual string generate(const vector<string>& args){return "";}
+    virtual string generate(const vector<string>& args, int currln){return "";}
     //virtual string generateMC(const vector<string>& v) = 0;
 };
 #endif

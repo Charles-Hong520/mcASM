@@ -8,7 +8,7 @@ class Operation : public WriteInstruction {
         argCount = 3;
         reqs = {'v', 'n', 'n'};
     }
-    string generate(const vector<string>& args) {
+    string generate(const vector<string>& args, int currln) {
         string ans = "";
         
         if(isNumber(args[2])) ans += mcAssignImm(ARG1,args[2].substr(1,args[2].size()-1));

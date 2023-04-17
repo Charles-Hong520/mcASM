@@ -8,7 +8,9 @@ class Jif : public Instruction {
         argCount = 2;
         reqs = {'v', 'l'};
     }
-    string generate(const vector<string>& args) {
+    string generate(const vector<string>& args, int currln) {
+        int jmpTo = std::stoi(args[2]);
+        if (currln >= jmpTo) jmpTo--;
         return "";
         
     }

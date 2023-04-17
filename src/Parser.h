@@ -213,16 +213,16 @@ class Parser {
         
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
             ofstream fout(filename+"/"+to_string(lineNumber+1)+".mcfunction");
-            fout<<currInst->generate(currArgs);
+            fout<<currInst->generate(currArgs,lineNumber+1);
             fout.close();
         }
         ofstream fout(filename+"/main.mcfunction");
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
             fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches "<<lineNumber+1;
-            fout<<" run function "<<PKGNM<<"/"<<this->filename<<":"<<lineNumber+1<<endl;
+            fout<<" run function "<<PKGNM<<":"<<this->filename<<"/"<<lineNumber+1<<endl;
         }
         fout<<"scoreboard players add "<<PC<<" "<<OBJ_INTERNAL<<" 1"<<endl;
-        fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches .."<<(int)lines.size()<<" run function "<<PKGNM<<"/"<<this->filename<<":main";
+        fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches .."<<(int)lines.size()<<" run function "<<PKGNM<<":"<<this->filename<<"/main";
         fout.close();
         // execute if score programCounter Variable matches 0 run function assembly:a
         // execute if score programCounter Variable matches 1 run function assembly:b
