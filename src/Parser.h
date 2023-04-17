@@ -45,12 +45,24 @@ class Parser {
         filename = "";
     }
     bool parse(const string& fn) {
+        if(fn.substr(fn.size()-3,3)!=".mc") {
+            std::cerr<<"input file does not have \".mc\" extension"<<endl;
+            return false;
+        }
+        ifstream fin;
+        fin.open(fn);
+        if(!fin) {
+            std::cerr<<"\""<<fn<<"\" does not exist"<<endl;
+            return false;
+        }
+        
+        
         string tmpstring = fn;
+        
         for(char c : tmpstring) {
             c = c|32;
             if(c<='z' && c>='a') filename.push_back(c);
         }
-        ifstream fin(fn);
         string line;
         while(getline(fin, line)) {
             parseLine(line);
@@ -194,15 +206,17 @@ class Parser {
         }
     }
     void generateMcfunctionFiles() {
-        std::filesystem::remove_all("Output");
-        mkdir("Output", 0777);
-
+        std::filesystem::remove_all(filename);
+        // mkdir("Output", 0777);
+        std::error_code err;
+        std::filesystem::create_directories(filename, err);
+        
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
-            ofstream fout("Output/"+to_string(lineNumber+1)+".mcfunction");
+            ofstream fout(filename+"/"+to_string(lineNumber+1)+".mcfunction");
             fout<<currInst->generate(currArgs);
             fout.close();
         }
-        ofstream fout("Output/main.mcfunction");
+        ofstream fout(filename+"/main.mcfunction");
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
             fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches "<<lineNumber+1;
             fout<<" run function "<<PKGNM<<"/"<<this->filename<<":"<<lineNumber+1<<endl;
