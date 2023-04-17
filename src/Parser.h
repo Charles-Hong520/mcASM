@@ -196,11 +196,11 @@ class Parser {
         }
         ofstream fout("Output/main.mcfunction");
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
-            fout<<"execute if score programCounter Variable matches "<<lineNumber+1;
+            fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches "<<lineNumber+1;
             fout<<" run function assembly:"<<lineNumber+1<<endl;
         }
-        fout<<"scoreboard players add programCounter Variable 1"<<endl;
-        fout<<"execute if score programCounter Variable matches ..2 run function assembly:main";
+        fout<<"scoreboard players add "<<PC<<" "<<OBJ_INTERNAL<<" 1"<<endl;
+        fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches .."<<(int)lines.size()<<" run function assembly:main";
         fout.close();
         // execute if score programCounter Variable matches 0 run function assembly:a
         // execute if score programCounter Variable matches 1 run function assembly:b

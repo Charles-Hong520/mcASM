@@ -17,8 +17,10 @@ class Operation : public WriteInstruction {
         if(isNumber(args[3])) ans += mcAssignImm(ARG2,args[3].substr(1,args[3].size()-1));
         else ans += mcAssignVar(ARG2,args[3]);
         
-        ans += "run "+this->name+".mc\n";
-        ans += mcAssignVar(args[1], RET);
+        ans += "function ";
+        ans += PKGNM;
+        ans += ":" + this->name+"\n";
+        ans += "scoreboard players operation "+args[1]+" "+OBJ_VARS+" = "+RET+" "+OBJ_INTERNAL;
         return ans;
     }
 };

@@ -15,8 +15,10 @@ class WriteInstruction : public Instruction {
         else ans += mcAssignVar(ARG1,args[2]);
 
         
-        ans += "run "+this->name+".mc\n";
-        ans += mcAssignVar(args[1], RET);
+        ans += "function ";
+        ans += PKGNM;
+        ans += ":" + this->name+"\n";
+        ans += "scoreboard players operation "+args[1]+" "+OBJ_VARS+" = "+RET+" "+OBJ_INTERNAL;
         return ans;
     }
 };

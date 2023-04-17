@@ -1,3 +1,3 @@
 scoreboard players set __arg1 Internal 2
-run ass.mc
-scoreboard players operation b Internal = __ret Vars
+function mcasm:ass
+scoreboard players operation b Vars = __ret Internal

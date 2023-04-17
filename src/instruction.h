@@ -2,9 +2,11 @@
 #define __INSTRUCTION__
 #define OBJ_VARS "Vars"
 #define OBJ_INTERNAL "Internal"
+#define PKGNM "mcasm"
 #define ARG1 "__arg1"
 #define ARG2 "__arg2"
 #define RET "__ret"
+#define PC "__pc"
 bool isVariable(const string& str) {
     return (str[0]<='Z' && str[0]>='A') || (str[0]<='z' && str[0]>='a');
 }
