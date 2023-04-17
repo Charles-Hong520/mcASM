@@ -16,6 +16,7 @@ class Parser {
     vector<Error> errs;
     set<string> RAWvars;
     int lineNumber = 0;
+    string filename;
 
     public:
     Parser() {
@@ -42,7 +43,9 @@ class Parser {
             {"jif", new Jif()}
         };
     }
-    bool parse(std::ifstream & fin) {
+    bool parse(const string& fn) {
+        filename = fn;
+        ifstream fin(fn);
         string line;
         while(getline(fin, line)) {
             parseLine(line);
@@ -197,7 +200,7 @@ class Parser {
         ofstream fout("Output/main.mcfunction");
         for(lineNumber = 0; lineNumber < (int)lines.size(); lineNumber++) {
             fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches "<<lineNumber+1;
-            fout<<" run function assembly:"<<lineNumber+1<<endl;
+            fout<<" run function "<<PKGNM<<"/"<<this->filename<<":"<<lineNumber+1<<endl;
         }
         fout<<"scoreboard players add "<<PC<<" "<<OBJ_INTERNAL<<" 1"<<endl;
         fout<<"execute if score "<<PC<<" "<<OBJ_INTERNAL<<" matches .."<<(int)lines.size()<<" run function assembly:main";

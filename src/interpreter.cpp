@@ -30,9 +30,8 @@ int main(int argc, char** argv) {
         cerr<<"invalid argument count"<<endl;
         return 1;
     }
-    std::ifstream fin(argv[1]);
     Parser parser;
-    if(!parser.parse(fin)) {
+    if(!parser.parse(argv[1])) {
         parser.printErrors();
         return 1;
     }
