@@ -16,7 +16,7 @@ class Parser {
     vector<Error> errs;
     set<string> RAWvars;
     int lineNumber = 0;
-    string filename;
+    string filename="";
 
     public:
     Parser() {
@@ -42,9 +42,14 @@ class Parser {
             {"jmp", new Jmp()},
             {"jif", new Jif()}
         };
+        filename = "";
     }
     bool parse(const string& fn) {
-        filename = fn;
+        string tmpstring = fn;
+        for(char c : tmpstring) {
+            c = c|32;
+            if(c<='z' && c>='a') filename.push_back(c);
+        }
         ifstream fin(fn);
         string line;
         while(getline(fin, line)) {
