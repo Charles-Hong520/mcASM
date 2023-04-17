@@ -12,4 +12,4 @@ scoreboard players add __arg1 Internal 0
 scoreboard players add __arg2 Internal 0
 scoreboard players add __arg3 Internal 0
 scoreboard players add __ret Internal 0
-scoreboard players add __pc Internal 0
+scoreboard players add __pc Internal 1
